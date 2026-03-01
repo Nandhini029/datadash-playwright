@@ -1,0 +1,29 @@
+name: DataDash QA Scraper
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: 23f1000537@ds.study.iitm.ac.in - Scrape and Sum Tables
+        run: echo "Starting scrape for 23f1000537@ds.study.iitm.ac.in"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install Playwright
+        run: |
+          npm init -y
+          npm install playwright
+          npx playwright install chromium
+
+      - name: Run Scraper
+        run: node scrape.js
